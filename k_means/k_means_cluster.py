@@ -51,7 +51,21 @@ feature_2 = "exercised_stock_options"
 poi  = "poi"
 features_list = [poi, feature_1, feature_2]
 data = featureFormat(data_dict, features_list )
+
+"""
+#Feature Scaling by hand
+import numpy as np
+print "S-> ",(200000 - np.min(data[:,1]))/np.ptp(data[:,1])
+print "ESO-> ",(1000000 - np.min(data[:,2]))/np.ptp(data[:,2])
+"""
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+data = scaler.fit_transform(data)
+
 poi, finance_features = targetFeatureSplit( data )
+
 
 
 ### in the "clustering with 3 features" part of the mini-project,
@@ -65,7 +79,11 @@ plt.show()
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
 
-
+from sklearn.cluster import KMeans
+#Eğer poi yi de katarsan sonuç poilere göre kümelenmeye yol açıyor
+clf = KMeans(n_clusters=2, n_init=50)
+clf.fit(data[:,[1,2]])
+pred = clf.predict(data[:,[1,2]])
 
 
 ### rename the "name" parameter when you change the number of features

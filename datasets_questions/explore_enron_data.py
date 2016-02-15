@@ -19,4 +19,12 @@ import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
-
+poi = 0
+npoi = 0
+for name in enron_data:
+    if enron_data[name]["poi"]:
+        poi+=1
+    else:
+        npoi+=1
+        
+print "Person Of Interest: ", poi, " Others: ", npoi, " Total: ", poi + npoi

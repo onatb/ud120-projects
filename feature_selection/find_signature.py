@@ -35,9 +35,24 @@ features_test  = vectorizer.transform(features_test).toarray()
 features_train = features_train[:150].toarray()
 labels_train   = labels_train[:150]
 
-
-
 ### your code goes here
 
+from sklearn import tree
+from sklearn.metrics import accuracy_score
+
+clf = tree.DecisionTreeClassifier()
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+
+import numpy as np
+fi = clf.feature_importances_
+features = vectorizer.get_feature_names()
+
+ix = np.argpartition(-fi, 5)[:5]
+rs = -np.partition(-fi, 5)[:5]
+
+for i in range(0,5):
+    print features[ix[i]], " ", ix[i], " ", rs[i]
 
 
+print accuracy_score(pred, labels_test)

@@ -31,13 +31,80 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from sklearn.metrics import accuracy_score
+"""
+# 1) Naive Bayes
+
+from sklearn.naive_bayes import GaussianNB
+
+clf = GaussianNB()
+
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+acc = accuracy_score(pred, labels_test)
+print "Naive Bayes Alg. Accuracy: ", acc
+"""
+# 2) SVM
+
+from sklearn.svm import SVC
+
+clf = SVC(kernel='rbf', C=10000, gamma=0.6)
+
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+acc = accuracy_score(pred, labels_test)
+print "SVM Alg. Accuracy: ", acc
+
+"""
+# 3) Decision Tree
+
+from sklearn import tree
+
+clf = tree.DecisionTreeClassifier()
+
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+acc = accuracy_score(pred, labels_test)
+print "Decision Tree Alg. Accuracy: ", acc
+
+# 4) k nearest neighbor
+
+from sklearn.neighbors import KNeighborsClassifier
+
+clf = KNeighborsClassifier()
+
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+acc = accuracy_score(pred, labels_test)
+print "K Nearest Neighbor Alg. Accuracy: ", acc
 
 
 
+# 5) random forest
+
+from sklearn.ensemble import RandomForestClassifier
+
+clf = RandomForestClassifier()
+
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+acc = accuracy_score(pred, labels_test)
+print "Random Forest Alg. Accuracy: ", acc
 
 
 
+# 6) adaboost
 
+from sklearn.ensemble import AdaBoostClassifier
+
+clf = AdaBoostClassifier(n_estimators=80)
+
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+acc = accuracy_score(pred, labels_test)
+print "Adaboost Alg. Accuracy: ", acc
+
+"""
 try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
