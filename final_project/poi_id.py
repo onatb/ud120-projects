@@ -5,6 +5,7 @@ import pickle
 from time import time
 import numpy as np
 from collections import Counter
+from pprint import pprint
 
 sys.path.append("../tools/")
 
@@ -215,8 +216,6 @@ def optimizer(clf, params, features, labels):
     best_score = 0.0
     best_estimator = []
     for method in ['SelectKBest', 'PCA', 'PCA,SelectKBest']:
-    #cv folds=1000 yap
-    #for method in ['SelectKBest']:
         
         # Grid Search CV parameters will be stored in this dict
         param_grid = {}
@@ -256,6 +255,8 @@ def optimizer(clf, params, features, labels):
         grid_search = GridSearchCV(pipeline, param_grid=param_grid, cv=cv, scoring="f1", verbose=5)
         grid_search.fit(features, labels)
         
+                
+        
         if grid_search.best_score_ > best_score:
             best_score = grid_search.best_score_
             best_estimator = [grid_search.best_estimator_, grid_search.best_score_]
@@ -265,8 +266,9 @@ def optimizer(clf, params, features, labels):
 # Give classifier name and its parameters to 'optimizer' method to find the best estimator
 # p.s. use 'clf__<parameter_name>' syntax
  
-
-
+# Uncomment this part to calculate calssifier results again
+# p.s. It takes approximately 2 hours to run all 5 classifiers
+"""
 t0 = time()
 
 results = []
@@ -275,7 +277,7 @@ results = []
 results.append(optimizer(GaussianNB(),
                          {},
                          features, labels))
-"""
+
 # Logistic Regression
 results.append(optimizer(LogisticRegression(),
                          {'clf__random_state' : [42],
@@ -289,41 +291,56 @@ results.append(optimizer(RandomForestClassifier(),
                           'clf__min_samples_split' : [2, 5, 8],
                           'clf__max_features' : ['sqrt', 'log2']},
                          features, labels))
-"""
 
-"""
+
+
 # K Nearest Neighbors
 results.append(optimizer(KNeighborsClassifier(),
-                         {'clf__n_neighbors' : [2, 3, 5, 7],
+                         {'clf__n_neighbors' : [2, 3, 5],
                           'clf__weights' : ['distance']},
                          features, labels))
            
 # Adaboost
 results.append(optimizer(AdaBoostClassifier(),
-                         {'clf__n_estimators' : [40, 60, 80],
-                          'clf__learning_rate' : [0.4, 0.6, 0.8]},
+                         {'clf__n_estimators' : [40, 60],
+                          'clf__learning_rate' : [0.4, 0.6]},
                          features, labels))
-"""                   
+                  
 with open("optimizer_results.pkl", "w") as results_file:
     pickle.dump(results, results_file)
 
 print "Grid Search CV time:", round((time()-t0) / 60.0, 3), "mins"
 
-
+"""
+nb = 0 
 with open("optimizer_results.pkl", "r") as results_file:
-    print pickle.load(results_file)
-               
+    results = pickle.load(results_file)
+    for result in results:
+        pprint(result)
+        # For naive bayes, print the selected features
+        if nb == 0:
+            support = result[0].named_steps['selection'].get_support()
+            scores = result[0].named_steps['selection'].scores_
+            print "Selected Features:"
+            for i in range(1,17):
+                if support[i]:
+                    print all_features[i+1], scores[i]
+                result[0].named_steps['selection']
+            nb+=1
+
+                    
 clf = Pipeline([('scaler', MinMaxScaler(copy=False)),
                 ('selection', SelectKBest(k=5)),
                 ('clf', GaussianNB())])
                 
+# Pipeline does the whole job step by step by fitting and transforming each step
+# no need to send the selected features
 features_list = all_features
 
-test_classifier(clf, my_dataset, features_list)
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure
 ### that the version of poi_id.py that you submit can be run on its own and
 ### generates the necessary .pkl files for validating your results.
 
-#dump_classifier_and_data(clf, my_dataset, features_list)
+dump_classifier_and_data(clf, my_dataset, features_list)
