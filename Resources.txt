@@ -1,0 +1,31 @@
+REFERENCE LIST
+
+http://blog.explainmydata.com/2012/07/should-you-apply-pca-to-your-data.html
+http://scikit-learn.org/stable/auto_examples/plot_digits_pipe.html
+http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html#sklearn.preprocessing.MinMaxScaler
+http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline
+http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.FeatureUnion.html#sklearn.pipeline.FeatureUnion
+http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html#sklearn.cross_validation.train_test_split
+http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.KFold.html
+http://stackoverflow.com/questions/33091376/python-what-is-exactly-sklearn-pipeline-pipeline
+http://stackoverflow.com/questions/9553638/python-find-the-index-of-an-item-in-a-list-of-lists
+http://chrisstrelioff.ws/sandbox/2015/06/25/decision_trees_in_python_again_cross_validation.html
+http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
+http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier
+http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier
+http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html
+http://nbviewer.jupyter.org/gist/swwelch/64a71c4e67f829728e27/GridSearchCV%20and%20Pipelines.ipynb
+http://nbviewer.jupyter.org/github/jming/cs109/blob/master/lec_10_cross_val.ipynb
+https://github.com/bugra/pydata-dal-2015/blob/master/4.%20Scikit%20Learn%20-%20Pipeline.ipynb
+https://discussions.udacity.com/t/gridsearchcv-and-testingtraining-data/36107/16
+https://discussions.udacity.com/c/nd002-p5-intro-to-machine-learning/p5-identifying-fraud-from-enron-email/l/top
+http://www.economist.com/node/940091
+http://www.investopedia.com/articles/stocks/09/enron-collapse.asp
+https://en.wikipedia.org/wiki/Enron_scandal
+https://www.cs.cmu.edu/~./enron/
+
+
+I hereby confirm that this submission is my work. 
+I have cited above the origins of any parts of the submission that were taken from 
+Websites, books, forums, blog posts, github repositories, etc.
